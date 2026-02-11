@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+</head>
+<body class="bg-white flex flex-col min-h-screen">
+
+    <%- include('partials/header') %>
+
+    <section class="py-12 flex-grow">
+        <div class="container mx-auto px-4">
+            
+            <div class="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
+                <p class="text-gray-500 text-sm">
+                    Showing all <%= products.length %> results
+                </p>
+                
+                <form class="relative">
+                    <select class="appearance-none bg-white border border-gray-300 text-gray-700 py-2 pl-4 pr-10 rounded shadow-sm focus:outline-none focus:border-[#4CAF50] cursor-pointer text-sm">
+                        <option>Default sorting</option>
+                        <option>Sort by popularity</option>
+                        <option>Sort by price: low to high</option>
+                        <option>Sort by price: high to low</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500">
+                        <i class="ph ph-caret-down"></i>
+                    </div>
+                </form>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                
+                <% products.forEach(product => { %>
+                <div class="group relative bg-white border border-gray-100 rounded-2xl p-4 transition-all duration-300 hover:shadow-xl hover:border-gray-200 overflow-hidden">
+                    
+                    <% if(product.originalPrice > product.price && product.originalPrice > 0) { %>
+                        <span class="absolute top-4 left-4 bg-red-100 text-[#D32F2F] text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wide z-10">
+                            -<%= Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100) %>%
+                        </span>
+                    <% } %>
+
+                    <div class="relative w-full h-64 flex items-center justify-center bg-gray-50 rounded-xl overflow-hidden mb-4">
+                        <a href="/product/<%= product.id %>">
+                        <img src="<%= product.image %>" alt="<%= product.name %>" class="h-48 w-auto object-contain transition-transform duration-500 group-hover:scale-110 mix-blend-multiply">
+                        </a>
+                        <div class="absolute bottom-0 left-4 right-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <button class="w-full bg-white text-gray-800 font-bold py-3 rounded shadow-md flex items-center justify-center gap-2 hover:bg-[#4CAF50] hover:text-white transition">
+                                <i class="ph ph-shopping-cart text-xl"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="text-left">
+                        <p class="text-xs text-gray-400 mb-1">Fruits</p>
+                        <h3 class="text-gray-800 font-bold text-lg mb-1 truncate group-hover:text-[#4CAF50] transition-colors">
+                            <%= product.name %>
+                        </h3>
+                        
+                        <div class="flex gap-0.5 text-yellow-400 text-xs mb-2">
+                            <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                        </div>
+
+                        <div class="flex items-center gap-3">
+                            <span class="text-lg font-extrabold text-gray-900">₹<%= product.price %></span>
+                            <% if(product.originalPrice > 0) { %>
+                                <span class="text-gray-400 line-through text-sm">₹<%= product.originalPrice %></span>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+                <% }); %>
+
+            </div>
+
+        </div>
+    </section>
+
+    <%- include('partials/footer') %>
+
+</body>
+</html>

@@ -1,0 +1,152 @@
+<script src="https://cdn.tailwindcss.com"></script>
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+  rel="stylesheet"
+/>
+<script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+<style>
+  body {
+    font-family: "Inter", sans-serif;
+  }
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+</style>
+
+<header class="w-full bg-white shadow-sm font-sans">
+  <div
+    class="container mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4"
+  >
+    <a href="/" class="flex items-center gap-2">
+      <img
+        src="/images/logo.png"
+        alt="Janta Agro"
+        class="h-16 w-auto object-contain"
+      />
+    </a>
+
+    <div class="flex-1 max-w-xl w-full relative">
+      <div
+        class="flex items-center border border-gray-300 rounded-full overflow-hidden bg-gray-50 focus-within:ring-2 focus-within:ring-[#4CAF50]"
+      >
+        <input
+          type="text"
+          placeholder="Search for products..."
+          class="w-full py-3 px-5 outline-none bg-transparent text-gray-700"
+        />
+        <div class="border-l border-gray-300 h-6"></div>
+        <select
+          class="p-3 bg-transparent text-sm text-gray-600 outline-none cursor-pointer hidden sm:block"
+        >
+          <option>All Categories</option>
+          <option>Fruits</option>
+          <option>Vegetables</option>
+        </select>
+        <button
+          class="bg-gray-100 hover:bg-gray-200 text-gray-600 px-5 py-3 transition"
+        >
+          <i class="ph ph-magnifying-glass text-xl"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <div class="hidden lg:flex items-center gap-2 text-right">
+        <div class="bg-gray-100 p-2 rounded-full">
+          <i class="ph ph-phone-call text-[#4CAF50] text-xl"></i>
+        </div>
+        <div>
+          <p class="text-xs text-gray-500 font-semibold">CALL US NOW</p>
+          <p class="text-sm font-bold text-gray-800">+91 7448124205</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-4 text-gray-700">
+        <a href="#" class="hover:text-[#4CAF50] transition"
+          ><i class="ph ph-heart text-2xl"></i
+        ></a>
+        <a href="#" class="hover:text-[#4CAF50] transition"
+          ><i class="ph ph-user text-2xl"></i
+        ></a>
+
+        <a
+          href="/cart"
+          class="relative hover:text-[#4CAF50] transition flex items-center gap-2"
+        >
+          <div class="relative">
+            <i class="ph ph-shopping-bag text-2xl"></i>
+            <span
+              class="absolute -top-1 -right-2 bg-[#4CAF50] text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full"
+              >0</span
+            >
+          </div>
+          <span class="text-sm font-semibold hidden sm:block">₹0.00</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <nav class="bg-[#D32F2F] text-white">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center justify-between">
+        <div
+          class="relative group cursor-pointer bg-[#B71C1C] px-6 py-4 flex items-center gap-3 font-bold uppercase tracking-wide text-sm"
+        >
+          <i class="ph ph-list text-xl"></i>
+          <span>Categories</span>
+          <i class="ph ph-caret-down ml-auto"></i>
+
+          <div
+            class="absolute top-full left-0 w-64 bg-white text-gray-800 shadow-xl border-t-2 border-[#D32F2F] hidden group-hover:block z-50"
+          >
+            <a
+              href="#"
+              class="block px-6 py-3 hover:bg-gray-50 border-b border-gray-100 transition"
+              >Organic Fruits</a
+            >
+            <a
+              href="#"
+              class="block px-6 py-3 hover:bg-gray-50 border-b border-gray-100 transition"
+              >Vegetables</a
+            >
+            <a
+              href="#"
+              class="block px-6 py-3 hover:bg-gray-50 border-b border-gray-100 transition"
+              >Dry Fruits</a
+            >
+          </div>
+        </div>
+
+        <div
+          class="hidden md:flex items-center gap-8 text-xs font-bold uppercase tracking-wider"
+        >
+          <a href="/" class="hover:text-yellow-300 transition">Home</a>
+          <a href="/shop" class="hover:text-yellow-300 transition">Shop</a>
+          <a href="/about" class="hover:text-yellow-300 transition">About Us</a>
+          <a href="/contact" class="hover:text-yellow-300 transition"
+            >Contact Us</a
+          >
+        </div>
+
+        <a
+          href="/packaging-delivery"
+          class="hidden lg:block text-xs font-bold uppercase tracking-wider hover:text-yellow-300 transition"
+        >
+          Delivery & Packaging
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>

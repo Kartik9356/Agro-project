@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+  </head>
+  <body class="bg-gray-50">
+    <%- include('partials/header') %>
+
+    <section
+      class="relative bg-[#4da851] overflow-hidden h-[500px] flex items-center"
+    >
+      <div
+        class="absolute top-0 right-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/leaf.png')]"
+      ></div>
+
+      <div
+        class="container mx-auto px-4 relative z-10 grid grid-cols-1 md:grid-cols-2 items-center gap-8"
+      >
+        <div class="text-white space-y-6 animate-fade-in-up">
+          <span
+            class="bg-white/20 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border border-white/30"
+          >
+            Organic Always Fresh
+          </span>
+
+          <h1 class="text-4xl md:text-6xl font-extrabold leading-tight">
+            Organic fruits, <br />
+            delivered fresh.
+          </h1>
+
+          <p class="text-lg md:text-xl text-green-100 max-w-lg leading-relaxed">
+            Choosing organic fruits isn't just a healthier decision for you —
+            it's a step toward a more sustainable future.
+          </p>
+
+          <div class="pt-4">
+            <a
+              href="/shop"
+              class="inline-flex items-center gap-2 bg-[#2E7D32] hover:bg-[#1B5E20] text-white font-bold py-4 px-8 rounded shadow-lg transform hover:-translate-y-1 transition duration-300"
+            >
+              <i class="ph ph-shopping-cart text-xl"></i>
+              SHOP NOW
+            </a>
+          </div>
+        </div>
+
+        <div class="relative hidden md:block">
+          <img
+            src="/images/fruit-basket.png"
+            alt="Fresh Fruits"
+            class="w-full max-w-lg mx-auto drop-shadow-2xl hover:scale-105 transition duration-500"
+          />
+
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/740/740845.png"
+            class="absolute -top-10 -right-10 w-20 opacity-80 animate-bounce"
+            style="animation-duration: 3s"
+          />
+        </div>
+      </div>
+
+      <div class="absolute bottom-0 left-0 w-full leading-none">
+        <svg
+          class="block w-full h-12 md:h-24"
+          viewBox="0 0 1440 320"
+          preserveAspectRatio="none"
+        >
+          <path
+            fill="#f9fafb"
+            fill-opacity="1"
+            d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,197.3C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+          ></path>
+        </svg>
+      </div>
+    </section>
+    <section class="py-16 bg-white relative">
+        <div class="container mx-auto px-4">
+            
+            <div class="flex items-center justify-between mb-10">
+                <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">
+                    Explore Our Products
+                </h2>
+                <div class="flex gap-2">
+                    <button id="prevBtn" class="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-[#4CAF50] hover:text-white transition shadow-sm focus:outline-none">
+                        <i class="ph ph-caret-left text-lg"></i>
+                    </button>
+                    <button id="nextBtn" class="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-[#4CAF50] hover:text-white transition shadow-sm focus:outline-none">
+                        <i class="ph ph-caret-right text-lg"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="productContainer" class="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-8 hide-scrollbar">
+                
+                <% products.forEach(product => { %>
+                <div class="min-w-[280px] md:min-w-[320px] snap-start flex-none group relative bg-white border border-gray-100 rounded-2xl p-4 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 overflow-hidden">
+                    
+                    <% if(product.originalPrice > product.price) { %>
+                        <span class="absolute top-4 left-4 bg-red-100 text-[#D32F2F] text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wide z-10">
+                            -<%= Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100) %>%
+                        </span>
+                    <% } %>
+
+                    <div class="relative w-full h-56 flex items-center justify-center bg-gray-50 rounded-xl overflow-hidden mb-4">
+                        <a href="/product/<%= product.id %>">
+                            <img src="<%= product.image %>" alt="<%= product.name %>" class="h-48 w-auto object-contain transition-transform duration-500 group-hover:scale-110 mix-blend-multiply">
+                        </a>
+                        <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <button class="w-full bg-[#4CAF50] text-white font-bold py-3 rounded-lg shadow-lg flex items-center justify-center gap-2 hover:bg-[#388E3C] active:scale-95 transition">
+                                <i class="ph ph-shopping-bag"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <h3 class="text-gray-800 font-bold text-lg mb-1 truncate group-hover:text-[#4CAF50] transition-colors">
+                            <%= product.name %>
+                        </h3>
+                        <p class="text-gray-500 text-sm mb-3"><%= product.unit %></p>
+                        
+                        <div class="flex items-center justify-center gap-3">
+                            <span class="text-gray-400 line-through text-sm">₹<%= product.originalPrice %></span>
+                            <span class="text-xl font-extrabold text-[#2E7D32]">₹<%= product.price %></span>
+                        </div>
+                        
+                        <div class="flex justify-center gap-0.5 mt-2 text-yellow-400 text-sm">
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star-half"></i>
+                        </div>
+                    </div>
+                </div>
+                <% }); %>
+
+            </div>
+            
+            <div class="mt-4 text-center">
+                <a href="/shop" class="inline-block border-2 border-[#4CAF50] text-[#4CAF50] font-bold py-3 px-10 rounded-full hover:bg-[#4CAF50] hover:text-white transition duration-300 uppercase tracking-wide text-sm">
+                    View All Products
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <style>
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .hide-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+
+    <script>
+        const container = document.getElementById('productContainer');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        // Scroll amount (width of card + gap)
+        const scrollAmount = 340; 
+
+        nextBtn.addEventListener('click', () => {
+            container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+
+        prevBtn.addEventListener('click', () => {
+            container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
+    </script>
+
+    <div class="h-20"></div>
+    <%- include('partials/footer') %>
+  </body>
+</html>

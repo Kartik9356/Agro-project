@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+</head>
+<body class="bg-white font-sans text-gray-800 flex flex-col min-h-screen">
+
+    <%- include('partials/header') %>
+
+    <section class="py-16">
+        <div class="container mx-auto px-4 max-w-5xl">
+            
+            <div class="mb-10">
+                <p class="text-xl text-gray-800 font-medium mb-8">Thank you. Your order has been received.</p>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-0 border-b-2 border-dashed border-gray-200 pb-8 text-sm">
+                    
+                    <div class="md:border-r md:border-dashed md:border-gray-300 md:pr-6">
+                        <p class="text-gray-500 uppercase text-xs font-bold tracking-wider mb-1">Order Number:</p>
+                        <p class="text-gray-900 font-bold"><%= order.id %></p>
+                    </div>
+
+                    <div class="md:border-r md:border-dashed md:border-gray-300 md:px-6">
+                        <p class="text-gray-500 uppercase text-xs font-bold tracking-wider mb-1">Date:</p>
+                        <p class="text-gray-900 font-bold"><%= order.date %></p>
+                    </div>
+
+                    <div class="md:border-r md:border-dashed md:border-gray-300 md:px-6">
+                        <p class="text-gray-500 uppercase text-xs font-bold tracking-wider mb-1">Total:</p>
+                        <p class="text-gray-900 font-bold">₹<%= order.total.toFixed(2) %></p>
+                    </div>
+
+                    <div class="md:pl-6">
+                        <p class="text-gray-500 uppercase text-xs font-bold tracking-wider mb-1">Payment Method:</p>
+                        <p class="text-gray-900 font-bold"><%= order.paymentMethod %></p>
+                    </div>
+
+                </div>
+            </div>
+
+            <p class="text-gray-800 mb-12">Pay with cash upon delivery.</p>
+
+            <div class="mb-16">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Order details</h2>
+                
+                <div class="bg-white border border-gray-200 rounded-lg overflow-hidden">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="bg-gray-50 border-b border-gray-200">
+                                <th class="p-4 font-bold text-gray-700">Product</th>
+                                <th class="p-4 font-bold text-gray-700 text-right">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">
+                            <% order.items.forEach(item => { %>
+                            <tr>
+                                <td class="p-4 text-sm">
+                                    <a href="#" class="text-[#0073aa] hover:underline"><%= item.name %></a> 
+                                    <strong class="text-gray-900 ml-1">× <%= item.quantity %></strong>
+                                </td>
+                                <td class="p-4 font-bold text-gray-700 text-right text-sm">₹<%= (item.price * item.quantity).toFixed(2) %></td>
+                            </tr>
+                            <% }); %>
+
+                            <tr>
+                                <td class="p-4 font-bold text-gray-700 text-sm">Subtotal:</td>
+                                <td class="p-4 font-bold text-gray-900 text-right text-sm">₹<%= order.total.toFixed(2) %></td>
+                            </tr>
+
+                            <tr>
+                                <td class="p-4 font-bold text-gray-700 text-sm">Shipping:</td>
+                                <td class="p-4 text-gray-600 text-right text-sm">
+                                    <% if(order.shippingCost === 0) { %>
+                                        Free shipping
+                                    <% } else { %>
+                                        ₹<%= order.shippingCost %>
+                                    <% } %>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="p-4 font-bold text-gray-700 text-sm">Payment method:</td>
+                                <td class="p-4 text-gray-600 text-right text-sm"><%= order.paymentMethod %></td>
+                            </tr>
+
+                            <tr class="bg-gray-50 border-t border-gray-200">
+                                <td class="p-4 font-bold text-gray-900 text-base">Total:</td>
+                                <td class="p-4 font-extrabold text-gray-900 text-lg text-right">₹<%= order.total.toFixed(2) %></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                
+                <div class="bg-white border border-gray-200 rounded-lg p-8 shadow-sm">
+                    <h3 class="text-xl font-bold text-gray-900 mb-6">Billing address</h3>
+                    <address class="not-italic text-gray-600 space-y-2 text-sm leading-relaxed">
+                        <p class="text-gray-900 font-bold mb-2"><%= order.billing.name %></p>
+                        <p><%= order.billing.address %></p>
+                        <p><%= order.billing.city %> <%= order.billing.zip %></p>
+                        <p><%= order.billing.state %></p>
+                        <p class="flex items-center gap-2 mt-4 text-gray-800">
+                            <i class="ph-fill ph-phone text-[#4CAF50]"></i> <%= order.billing.phone %>
+                        </p>
+                        <p class="flex items-center gap-2 text-gray-800">
+                            <i class="ph-fill ph-envelope text-[#4CAF50]"></i> <%= order.billing.email %>
+                        </p>
+                    </address>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-lg p-8 shadow-sm">
+                    <h3 class="text-xl font-bold text-gray-900 mb-6">Shipping address</h3>
+                    <address class="not-italic text-gray-600 space-y-2 text-sm leading-relaxed">
+                        <p class="text-gray-900 font-bold mb-2"><%= order.shipping.name %></p>
+                        <p><%= order.shipping.address %></p>
+                        <p><%= order.shipping.city %> <%= order.shipping.zip %></p>
+                        <p><%= order.shipping.state %></p>
+                    </address>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <%- include('partials/footer') %>
+
+</body>
+</html>

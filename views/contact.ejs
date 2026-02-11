@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+  </head>
+  <body class="bg-white font-sans text-gray-800 flex flex-col min-h-screen">
+    <%- include('partials/header') %>
+
+    <div class="bg-gray-50 py-12 border-b border-gray-100">
+      <div class="container mx-auto px-4 text-center">
+        <h1 class="text-4xl font-extrabold text-gray-900 mb-2">Contact Us</h1>
+        <p class="text-gray-500">
+          We'd love to hear from you. Here is how you can reach us.
+        </p>
+      </div>
+    </div>
+
+    <section class="py-16">
+      <div class="container mx-auto px-4">
+        <div
+          class="flex flex-col lg:flex-row gap-12 bg-white rounded-3xl overflow-hidden shadow-xl border border-gray-100"
+        >
+          <div
+            class="lg:w-2/5 bg-[#2E7D32] text-white p-10 flex flex-col justify-between relative overflow-hidden"
+          >
+            <div
+              class="absolute -top-10 -right-10 w-40 h-40 bg-white opacity-10 rounded-full"
+            ></div>
+            <div
+              class="absolute bottom-10 left-10 w-20 h-20 bg-white opacity-10 rounded-full"
+            ></div>
+
+            <div>
+              <h2 class="text-2xl font-bold mb-6">Get In Touch</h2>
+              <p class="text-green-100 mb-8 leading-relaxed">
+                Have questions about bulk orders or organic sourcing? Fill out
+                the form and our team will get back to you within 24 hours.
+              </p>
+
+              <div class="space-y-6">
+                <div class="flex items-start gap-4">
+                  <div
+                    class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0"
+                  >
+                    <i class="ph-fill ph-map-pin text-xl"></i>
+                  </div>
+                  <div>
+                    <h5 class="font-bold text-lg">Visit Us</h5>
+                    <p class="text-green-100 text-sm leading-relaxed">
+                      Shop no 19 pakiza colony opp dargah walgaon road amravati
+                      444601, India
+                    </p>
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-4">
+                  <div
+                    class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0"
+                  >
+                    <i class="ph-fill ph-phone text-xl"></i>
+                  </div>
+                  <div>
+                    <h5 class="font-bold text-lg">Call Us</h5>
+                    <p class="text-green-100 text-sm">+91 7448124205</p>
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-4">
+                  <div
+                    class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0"
+                  >
+                    <i class="ph-fill ph-envelope text-xl"></i>
+                  </div>
+                  <div>
+                    <h5 class="font-bold text-lg">Email Us</h5>
+                    <p class="text-green-100 text-sm">
+                      info@jantaagrotraders.com
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-12 flex gap-4">
+              <a
+                href="#"
+                class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-[#2E7D32] transition"
+                ><i class="ph-fill ph-facebook-logo text-xl"></i
+              ></a>
+              <a
+                href="#"
+                class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-[#2E7D32] transition"
+                ><i class="ph-fill ph-instagram-logo text-xl"></i
+              ></a>
+              <a
+                href="#"
+                class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-[#2E7D32] transition"
+                ><i class="ph-fill ph-twitter-logo text-xl"></i
+              ></a>
+            </div>
+          </div>
+
+          <div class="lg:w-3/5 p-10 lg:p-16">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">
+              Send us a Message
+            </h2>
+
+            <form action="#" method="POST" class="space-y-6">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="space-y-2">
+                  <label class="text-sm font-bold text-gray-600"
+                    >Your Name</label
+                  >
+                  <input
+                    type="text"
+                    placeholder="John Doe"
+                    class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#4CAF50] focus:ring-2 focus:ring-green-100 outline-none transition bg-gray-50"
+                  />
+                </div>
+
+                <div class="space-y-2">
+                  <label class="text-sm font-bold text-gray-600"
+                    >Phone Number</label
+                  >
+                  <input
+                    type="tel"
+                    placeholder="+91 98765 43210"
+                    class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#4CAF50] focus:ring-2 focus:ring-green-100 outline-none transition bg-gray-50"
+                  />
+                </div>
+              </div>
+
+              <div class="space-y-2">
+                <label class="text-sm font-bold text-gray-600">Message</label>
+                <textarea
+                  rows="4"
+                  placeholder="I am interested in buying..."
+                  class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#4CAF50] focus:ring-2 focus:ring-green-100 outline-none transition bg-gray-50"
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                class="w-full bg-[#4CAF50] hover:bg-[#388E3C] text-white font-bold py-4 rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transition duration-300 flex items-center justify-center gap-2"
+              >
+                <i class="ph-bold ph-paper-plane-right"></i>
+                Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <%- include('partials/footer') %>
+  </body>
+</html>

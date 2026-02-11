@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+  </head>
+  <body class="bg-white font-sans text-gray-800">
+    <%- include('partials/header') %>
+
+    <div class="bg-gray-50 py-12 border-b border-gray-100">
+      <div class="container mx-auto px-4 text-center">
+        <h1
+          class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 tracking-tight"
+        >
+          Packaging & Delivery
+        </h1>
+        <p class="text-gray-500 max-w-2xl mx-auto text-lg">
+          From our farms to your doorstep, we ensure every fruit is handled with
+          care, packed securely, and delivered fresh.
+        </p>
+      </div>
+    </div>
+
+    <section class="py-20">
+      <div class="container mx-auto px-4 space-y-24">
+        <div class="flex flex-col md:flex-row items-center gap-12">
+          <div class="md:w-1/2 relative group">
+            <div
+              class="absolute inset-0 bg-[#4CAF50] rounded-2xl rotate-3 opacity-20 group-hover:rotate-6 transition duration-300"
+            ></div>
+            <img
+              src="https://media.istockphoto.com/id/528343773/photo/farmer-holding-corn-cob.jpg?s=612x612&w=0&k=20&c=6Y9QqC5dJ3zK7wG9q1oP5t8uR2vX3yZ4aB6cD7eF8g="
+              alt="Quality Check"
+              class="relative rounded-2xl shadow-xl w-full h-80 object-cover z-10"
+            />
+          </div>
+          <div class="md:w-1/2">
+            <div class="flex items-center gap-4 mb-4">
+              <span
+                class="w-12 h-12 bg-[#E8F5E9] text-[#2E7D32] rounded-full flex items-center justify-center font-bold text-xl"
+                >01</span
+              >
+              <h3 class="text-3xl font-bold text-gray-900">
+                Rigorous Quality Check
+              </h3>
+            </div>
+            <p class="text-gray-600 text-lg leading-relaxed mb-6">
+              Before packaging, every batch undergoes a strict inspection. We
+              manually check for freshness, size, and health. As seen in our
+              process, we inspect items like corn and bananas individually to
+              ensure only the best produce makes it to the box.
+            </p>
+            <ul class="space-y-2 text-gray-500">
+              <li class="flex items-center gap-2">
+                <i class="ph-fill ph-check-circle text-[#4CAF50]"></i>
+                Hand-picked selection
+              </li>
+              <li class="flex items-center gap-2">
+                <i class="ph-fill ph-check-circle text-[#4CAF50]"></i> Freshness
+                verification
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row-reverse items-center gap-12">
+          <div class="md:w-1/2 relative group">
+            <div
+              class="absolute inset-0 bg-[#D32F2F] rounded-2xl -rotate-3 opacity-10 group-hover:-rotate-6 transition duration-300"
+            ></div>
+            <img
+              src="https://media.istockphoto.com/id/1145618475/photo/weighing-bananas.jpg?s=612x612&w=0&k=20&c=1A2b3C4d5E6f7G8h9I0j"
+              alt="Weighing Process"
+              class="relative rounded-2xl shadow-xl w-full h-80 object-cover z-10"
+            />
+          </div>
+          <div class="md:w-1/2">
+            <div class="flex items-center gap-4 mb-4">
+              <span
+                class="w-12 h-12 bg-[#FFEBEE] text-[#D32F2F] rounded-full flex items-center justify-center font-bold text-xl"
+                >02</span
+              >
+              <h3 class="text-3xl font-bold text-gray-900">
+                Precision Weighing
+              </h3>
+            </div>
+            <p class="text-gray-600 text-lg leading-relaxed">
+              Honesty is our policy. We use calibrated digital scales to ensure
+              you get exactly what you paid for. Whether it's a bulk order of
+              watermelons or crates of bananas, our weighing process is
+              transparent and accurate.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row items-center gap-12">
+          <div class="md:w-1/2 relative group">
+            <div
+              class="absolute inset-0 bg-[#4CAF50] rounded-2xl rotate-3 opacity-20 group-hover:rotate-6 transition duration-300"
+            ></div>
+            <img
+              src="https://media.istockphoto.com/id/171585675/photo/banana-box.jpg?s=612x612&w=0&k=20&c=xY1z2A3b4C5d6E7f8G9h0I1j"
+              alt="Packaging"
+              class="relative rounded-2xl shadow-xl w-full h-80 object-cover z-10"
+            />
+          </div>
+          <div class="md:w-1/2">
+            <div class="flex items-center gap-4 mb-4">
+              <span
+                class="w-12 h-12 bg-[#E8F5E9] text-[#2E7D32] rounded-full flex items-center justify-center font-bold text-xl"
+                >03</span
+              >
+              <h3 class="text-3xl font-bold text-gray-900">
+                Protective Packaging
+              </h3>
+            </div>
+            <p class="text-gray-600 text-lg leading-relaxed">
+              We use high-grade corrugated boxes and protective liners to
+              prevent damage during transit. Our "Shorya 121" and other premium
+              banana brands are packed systematically to maintain airflow and
+              prevent bruising.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row-reverse items-center gap-12">
+          <div class="md:w-1/2 relative group">
+            <div
+              class="absolute inset-0 bg-[#D32F2F] rounded-2xl -rotate-3 opacity-10 group-hover:-rotate-6 transition duration-300"
+            ></div>
+            <img
+              src="https://media.istockphoto.com/id/1189973800/photo/loading-truck.jpg?s=612x612&w=0&k=20&c=1A2b3C4d5E6f7G8h9I0j"
+              alt="Truck Loading"
+              class="relative rounded-2xl shadow-xl w-full h-80 object-cover z-10"
+            />
+          </div>
+          <div class="md:w-1/2">
+            <div class="flex items-center gap-4 mb-4">
+              <span
+                class="w-12 h-12 bg-[#FFEBEE] text-[#D32F2F] rounded-full flex items-center justify-center font-bold text-xl"
+                >04</span
+              >
+              <h3 class="text-3xl font-bold text-gray-900">
+                Loading & Dispatch
+              </h3>
+            </div>
+            <p class="text-gray-600 text-lg leading-relaxed">
+              Our logistics team ensures that goods are loaded efficiently to
+              maximize stability. We work with trusted transport partners to
+              deliver bulk wholesale orders across India promptly.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12">On-Site Gallery</h2>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div
+            class="h-64 rounded-xl overflow-hidden hover:opacity-90 transition"
+          >
+            <img
+              src="https://media.istockphoto.com/id/1310986326/photo/indian-market.jpg?s=612x612&w=0&k=20&c=1"
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <div
+            class="h-64 rounded-xl overflow-hidden hover:opacity-90 transition"
+          >
+            <img
+              src="https://media.istockphoto.com/id/515233682/photo/indian-vegetables.jpg?s=612x612&w=0&k=20&c=2"
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <div
+            class="h-64 rounded-xl overflow-hidden hover:opacity-90 transition"
+          >
+            <img
+              src="https://media.istockphoto.com/id/497262070/photo/indian-farmers.jpg?s=612x612&w=0&k=20&c=3"
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <div
+            class="h-64 rounded-xl overflow-hidden hover:opacity-90 transition"
+          >
+            <img
+              src="https://media.istockphoto.com/id/522566233/photo/truck-india.jpg?s=612x612&w=0&k=20&c=4"
+              class="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-[#2E7D32] py-12 text-white">
+      <div
+        class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-8"
+      >
+        <div>
+          <h3 class="text-2xl font-bold">Bulk Orders? No Problem.</h3>
+          <p class="text-green-100">
+            We have the capacity to handle large scale wholesale requirements.
+          </p>
+        </div>
+        <a
+          href="/contact"
+          class="bg-white text-[#2E7D32] font-bold py-3 px-8 rounded-full shadow-lg hover:scale-105 transition"
+        >
+          Contact For Bulk Deal
+        </a>
+      </div>
+    </section>
+
+    <%- include('partials/footer') %>
+  </body>
+</html>
