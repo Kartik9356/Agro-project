@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+  </head>
+  <body class="bg-gray-50 font-sans text-gray-800 flex flex-col min-h-screen">
+    <%- include('partials/header') %>
+
+    <div class="bg-white border-b border-gray-200 py-10 mb-8">
+      <div class="container mx-auto px-4">
+        <h1 class="text-4xl font-extrabold text-gray-900 mb-2">
+          Terms & Conditions
+        </h1>
+        <p class="text-gray-500 text-sm">Last updated: February 12, 2026</p>
+      </div>
+    </div>
+
+    <section class="mb-auto">
+      <div class="container mx-auto px-4 max-w-4xl">
+        <div
+          class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 md:p-12 space-y-10"
+        >
+          <p class="text-gray-600 italic">
+            Welcome to <%= company.name %> Traders. These terms and conditions
+            outline the rules and regulations for the use of our website and
+            services. By accessing this website we assume you accept these terms
+            and conditions.
+          </p>
+
+          <div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">
+              1. Applicability
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              These Terms and Conditions apply to all offers, transactions, and
+              agreements between
+              <strong><%= company.name %> Traders</strong> (“Seller”) and the
+              buyer. Any terms and conditions proposed by the buyer are
+              expressly rejected unless approved in writing by the Seller.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">
+              2. Offers and Prices
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              All offers are non-binding. Prices may change periodically and all
+              new prices supersede previous quotations. Offers are subject to
+              stock availability, and the Seller may cancel or make proportional
+              supplies in the event of stock shortage.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">
+              3. Refund Policy
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              Refunds for cancelled orders apply only to payments made through
+              the online payment gateway by users ordering from the frontend.
+              Payments made through UPI or Cash on Delivery (COD) are not
+              automatically eligible for refunds without manual verification.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">
+              4. Force Majeure
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              Crop failure or other circumstances beyond the Seller’s control
+              that make performance impossible release the Seller from delivery
+              obligations entirely. The Seller is not liable for any damages
+              under such conditions.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">
+              5. Payment & Remittances
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              Orders will be shipped via courier or transport services. Bulky or
+              unshippable items will be delivered to the nearest serviceable
+              location. Shipping charges for non-free shipping products must be
+              paid by the customer before or at the time of delivery.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">
+              6. Accuracy of Information
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              The Seller does not guarantee that product descriptions or content
+              are accurate, complete, reliable, or error-free. No liability is
+              assumed for inaccuracies.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">
+              7. Dispute Resolution
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              All disputes are subject to the jurisdiction of courts and
+              relevant authorities in Maharashtra, India. Parties must first
+              attempt resolution through mutual consultation or mediation before
+              pursuing arbitration or litigation.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">
+              8. Acceptance of Terms
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              By placing an order, the buyer acknowledges and accepts all
+              disclaimers and limitations described herein. These terms
+              constitute the entire agreement between the parties.
+            </p>
+          </div>
+
+          <div class="space-y-6">
+            <div>
+              <h3 class="text-xl font-bold text-gray-900 mb-2">
+                9. Language & Translation
+              </h3>
+              <p class="text-gray-600">
+                Language translation features are powered by third-party
+                software. Accuracy may vary, and 100% precision cannot be
+                guaranteed.
+              </p>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-gray-900 mb-2">
+                10. User-Generated Content
+              </h3>
+              <p class="text-gray-600">
+                All images, graphics, trademarks, and content uploaded by
+                sellers or users are third-party generated. The Platform acts as
+                an intermediary and does not control such content. By uploading
+                content, you grant us perpetual and transferable rights to use
+                it for any purpose, subject to our Privacy Policy.
+              </p>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-gray-900 mb-2">
+                11. Permitted Use of Information
+              </h3>
+              <p class="text-gray-600">
+                You may download publicly available product information only for
+                personal, non-commercial use. You may not modify or redistribute
+                any documents or make additional representations about them.
+              </p>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-gray-900 mb-2">
+                12. Seller Responsibilities
+              </h3>
+              <p class="text-gray-600">
+                Sellers must ensure that no trademark or copyright violations
+                occur in product listings or images. The Platform may suspend
+                accounts or products involved in disputes.
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">
+              13. Farming-Related Product Disclaimer
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              All promotional material or photographs related to agricultural
+              solutions do not guarantee results. Effectiveness of products such
+              as pesticides or fertilizers varies based on environmental and
+              usage conditions.
+            </p>
+          </div>
+
+          <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
+            <h3
+              class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2"
+            >
+              <i class="ph-fill ph-flask text-[#4CAF50]"></i>
+              14. Fruit Ripening Gas Usage Guidelines
+            </h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <h4
+                  class="font-bold text-gray-800 mb-2 uppercase text-xs tracking-wider"
+                >
+                  How to Use:
+                </h4>
+                <ul
+                  class="list-disc list-inside space-y-2 text-sm text-gray-600"
+                >
+                  <li>
+                    Keep fruits in ventilated crates inside a controlled
+                    chamber.
+                  </li>
+                  <li>Spray the can fully inside the chamber.</li>
+                  <li>Maintain exposure for <strong>20–24 hours</strong>.</li>
+                  <li>
+                    Ventilate the room and maintain temperature until desired
+                    ripening.
+                  </li>
+                  <li>
+                    Process duration: approximately 3–4 days depending on
+                    variety.
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h4
+                  class="font-bold text-[#D32F2F] mb-2 uppercase text-xs tracking-wider"
+                >
+                  Safety Precautions:
+                </h4>
+                <ul
+                  class="list-disc list-inside space-y-2 text-sm text-gray-600"
+                >
+                  <li>Store in a cool, shaded area.</li>
+                  <li>Do not expose to flame or puncture the can.</li>
+                  <li>Keep out of reach of children.</li>
+                  <li>Contains no CFC (Chlorofluorocarbons).</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">
+              15. Governing Law
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              These Terms & Conditions are governed by the laws of India. All
+              disputes fall under the exclusive jurisdiction of courts in India.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">16. Contact Us</h3>
+            <p class="text-gray-600 leading-relaxed mb-4">
+              If you have questions or concerns regarding these Terms &
+              Conditions, please contact our support team.
+            </p>
+            <div
+              class="bg-gray-50 p-4 rounded-lg flex flex-col md:flex-row gap-6 text-sm"
+            >
+              <div class="flex items-center gap-2">
+                <i class="ph-fill ph-map-pin text-[#4CAF50] text-lg"></i>
+                <span>Shop no 19 pakiza colony opp dargah, Amravati</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i class="ph-fill ph-envelope text-[#4CAF50] text-lg"></i>
+                <span>blueberryimpex2024@gmail.com</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i class="ph-fill ph-phone text-[#4CAF50] text-lg"></i>
+                <span>+91 7448124205</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="h-20"></div>
+
+    <%- include('partials/footer') %>
+  </body>
+</html>

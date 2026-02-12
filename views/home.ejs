@@ -48,7 +48,7 @@
 
         <div class="relative hidden md:block">
           <img
-            src="/images/fruit-basket.png"
+            src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="Fresh Fruits"
             class="w-full max-w-lg mx-auto drop-shadow-2xl hover:scale-105 transition duration-500"
           />
@@ -104,13 +104,24 @@
                     <% } %>
 
                     <div class="relative w-full h-56 flex items-center justify-center bg-gray-50 rounded-xl overflow-hidden mb-4">
-                        <a href="/product/<%= product.id %>">
-                            <img src="<%= product.image %>" alt="<%= product.name %>" class="h-48 w-auto object-contain transition-transform duration-500 group-hover:scale-110 mix-blend-multiply">
-                        </a>
+                        <a href="/product/<%= product.id %>" class="w-full h-full flex items-center justify-center p-4">
+                          <img 
+                            src="<%= product.image %>" 
+                            alt="<%= product.name %>" 
+                            class="max-w-full max-h-full object-contain transition-transform duration-500 group-hover:scale-110 mix-blend-multiply"
+                          >
+                        </a>  
                         <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                            <button class="w-full bg-[#4CAF50] text-white font-bold py-3 rounded-lg shadow-lg flex items-center justify-center gap-2 hover:bg-[#388E3C] active:scale-95 transition">
-                                <i class="ph ph-shopping-bag"></i> Add to Cart
-                            </button>
+                          <button 
+                          class="add-to-cart-btn w-full bg-[#4CAF50] text-white font-bold py-3 rounded-lg shadow-lg flex items-center justify-center gap-2 hover:bg-[#388E3C] active:scale-95 transition"
+                          data-id="<%= product.id %>"
+                          data-name="<%= product.name %>"
+                          data-price="<%= product.price %>"
+                          data-image="<%= product.image %>"
+                          data-unit="<%= product.unit %>" 
+                        >
+                        <i class="ph ph-shopping-bag"></i> Add to Cart
+                        </button>
                         </div>
                     </div>
 
@@ -174,6 +185,83 @@
         prevBtn.addEventListener('click', () => {
             container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
         });
+    // 1. Initialize Cart on Page Load
+    document.addEventListener('DOMContentLoaded', () => {
+        updateCartHeader();
+    });
+
+    // 2. Select all "Add to Cart" buttons
+    const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+
+    // 3. Add Click Event Listeners
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Get product data from the HTML attributes
+            const product = {
+                id: this.dataset.id,
+                name: this.dataset.name,
+                // Ensure price is a number, not a string
+                price: parseFloat(this.dataset.price),
+                image: this.dataset.image,
+                quantity: 1
+            };
+
+            addToCart(product);
+            
+            // Visual Feedback (Button changes text briefly)
+            const originalContent = this.innerHTML;
+            this.innerHTML = '<i class="ph-fill ph-check-circle"></i> Added!';
+            this.classList.remove('bg-[#4CAF50]', 'hover:bg-[#388E3C]');
+            this.classList.add('bg-gray-800');
+            
+            setTimeout(() => {
+                this.innerHTML = originalContent;
+                this.classList.remove('bg-gray-800');
+                this.classList.add('bg-[#4CAF50]', 'hover:bg-[#388E3C]');
+            }, 1000);
+        });
+    });
+
+    // 4. Core Cart Logic
+    function addToCart(product) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Check if item already exists
+        const existingItemIndex = cart.findIndex(item => item.id === product.id);
+
+        if (existingItemIndex > -1) {
+            cart[existingItemIndex].quantity += 1;
+        } else {
+            cart.push(product);
+        }
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartHeader();
+    }
+
+    // 5. Update Header Function
+    function updateCartHeader() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        // Calculate Totals
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+        // Update DOM Elements
+        const cartCountEl = document.getElementById('cart-count');
+        const cartTotalEl = document.getElementById('cart-total');
+
+        // Update Count
+        if (cartCountEl) {
+            cartCountEl.textContent = totalItems;
+        }
+
+        // Update Price (Formatted to 2 decimal places)
+        if (cartTotalEl) {
+            cartTotalEl.innerText = '₹' + totalPrice.toFixed(2);
+        }
+    }
+
     </script>
 
     <div class="h-20"></div>

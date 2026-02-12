@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+  </head>
+  <body class="bg-gray-50 font-sans text-gray-800 flex flex-col min-h-screen">
+    <%- include('partials/header') %>
+
+    <div class="bg-white border-b border-gray-200 py-10 mb-8">
+      <div class="container mx-auto px-4">
+        <h1 class="text-4xl font-extrabold text-gray-900 mb-2">
+          Privacy Policy
+        </h1>
+        <p class="text-gray-500 text-sm">Last updated: February 12, 2026</p>
+      </div>
+    </div>
+
+    <section class="mb-auto">
+      <div class="container mx-auto px-4 max-w-4xl">
+        <div
+          class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 md:p-12 space-y-10"
+        >
+          <div>
+            <h2
+              class="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3"
+            >
+              <span
+                class="bg-green-100 text-[#2E7D32] w-8 h-8 rounded-full flex items-center justify-center text-sm"
+                >1</span
+              >
+              Information We Collect
+            </h2>
+
+            <div class="ml-11 space-y-4">
+              <div>
+                <h3 class="font-bold text-gray-800 mb-1">
+                  1.1 Information You Submit to Us
+                </h3>
+                <p class="text-gray-600 leading-relaxed">
+                  We welcome all visitors to browse our website. If you choose
+                  to make a purchase, we collect essential contact information
+                  required to process your order—such as your name, address,
+                  phone number, email address, and payment details. Optional
+                  fields may collect additional information like alternate
+                  shipping addresses or special instructions.
+                </p>
+              </div>
+              <div>
+                <h3 class="font-bold text-gray-800 mb-1">
+                  1.2 Information Gathered Automatically
+                </h3>
+                <p class="text-gray-600 leading-relaxed">
+                  Our servers automatically collect standard tracking
+                  information, including IP addresses, log files, and browsing
+                  activity. This data helps us understand site usage trends and
+                  improve user experience. All automatically collected data is
+                  aggregated and is not linked to any personally identifiable
+                  information.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h2
+              class="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3"
+            >
+              <span
+                class="bg-green-100 text-[#2E7D32] w-8 h-8 rounded-full flex items-center justify-center text-sm"
+                >2</span
+              >
+              Use of Cookies
+            </h2>
+            <div class="ml-11">
+              <p class="text-gray-600 leading-relaxed">
+                Cookies help ensure smooth navigation and
+                functionality—especially for Shopping Cart operations. Cookies
+                may also be used to customize content based on your browsing
+                behavior. You may disable cookies in your browser settings;
+                however, doing so may affect the website’s functionality.
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <h2
+              class="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3"
+            >
+              <span
+                class="bg-green-100 text-[#2E7D32] w-8 h-8 rounded-full flex items-center justify-center text-sm"
+                >3</span
+              >
+              How We Use Your Information
+            </h2>
+            <div class="ml-11">
+              <p class="text-gray-600 leading-relaxed mb-4">
+                Information you provide may be used to process payments, fulfill
+                orders, ship products, contact you about your purchase, and
+                respond to inquiries. We may also send promotional content with
+                your consent.
+              </p>
+              <div
+                class="bg-gray-50 border-l-4 border-[#4CAF50] p-4 text-sm text-gray-600"
+              >
+                <p>
+                  The website is owned by <strong><%= company.name %> Traders</strong>.
+                  You may download or print materials solely for personal,
+                  non-commercial use. Modification, redistribution,
+                  republication, or public display of any material without
+                  written permission is strictly prohibited.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h2
+              class="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3"
+            >
+              <span
+                class="bg-green-100 text-[#2E7D32] w-8 h-8 rounded-full flex items-center justify-center text-sm"
+                >4</span
+              >
+              Disclaimer & Limitation of Liability
+            </h2>
+            <div class="ml-11">
+              <p class="text-gray-600 leading-relaxed">
+                 <%= company.name %> Traders is not liable for any direct, indirect,
+                incidental, or consequential damages arising from the use or
+                inability to use this website. All information, images, pricing,
+                options, offers, and content may be changed without notice. If
+                you disagree with any terms of this policy, your sole remedy is
+                to discontinue using the website.
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <h2
+              class="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3"
+            >
+              <span
+                class="bg-green-100 text-[#2E7D32] w-8 h-8 rounded-full flex items-center justify-center text-sm"
+                >5</span
+              >
+              Leads From Promotions
+            </h2>
+            <div class="ml-11">
+              <p class="text-gray-600 leading-relaxed">
+                Information collected through promotional campaigns may be used
+                to communicate product offers and promotional activities. By
+                submitting your details, you agree to be contacted for marketing
+                purposes.
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <h2
+              class="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3"
+            >
+              <span
+                class="bg-green-100 text-[#2E7D32] w-8 h-8 rounded-full flex items-center justify-center text-sm"
+                >6</span
+              >
+              Sharing of Personal Information
+            </h2>
+            <div class="ml-11">
+              <p class="text-gray-600 leading-relaxed">
+                In the event of a merger, acquisition, restructuring, or
+                business transfer, your information may be shared with or sold
+                to another entity. The receiving entity will be bound by this
+                Privacy Policy.
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <h2
+              class="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3"
+            >
+              <span
+                class="bg-green-100 text-[#2E7D32] w-8 h-8 rounded-full flex items-center justify-center text-sm"
+                >7</span
+              >
+              Links to Other Websites
+            </h2>
+            <div class="ml-11">
+              <p class="text-gray-600 leading-relaxed">
+                Our website may contain links to third-party sites. We are not
+                responsible for their content or privacy practices. We encourage
+                users to review the privacy policies of these external sites.
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <h2
+              class="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3"
+            >
+              <span
+                class="bg-green-100 text-[#2E7D32] w-8 h-8 rounded-full flex items-center justify-center text-sm"
+                >8</span
+              >
+              Your Consent
+            </h2>
+            <div class="ml-11">
+              <p class="text-gray-600 leading-relaxed">
+                By using this website and providing your information, you
+                consent to the collection and use of your information as
+                outlined in this Privacy Policy.
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <h2
+              class="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3"
+            >
+              <span
+                class="bg-green-100 text-[#2E7D32] w-8 h-8 rounded-full flex items-center justify-center text-sm"
+                >9</span
+              >
+              Choice / Opt-Out / Data Deletion
+            </h2>
+            <div class="ml-11">
+              <p class="text-gray-600 leading-relaxed">
+                Users may opt out of marketing communications at any time by
+                clicking the unsubscribe link in emails or by contacting our
+                support team. You may also request deletion of your data from
+                our systems.
+              </p>
+              <div class="mt-4">
+                <a
+                  href="/contact"
+                  class="text-[#4CAF50] font-bold hover:underline"
+                  >Contact Support Team &rarr;</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="h-20"></div>
+
+    <%- include('partials/footer') %>
+  </body>
+</html>

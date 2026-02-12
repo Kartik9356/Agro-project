@@ -46,9 +46,16 @@
                         <img src="<%= product.image %>" alt="<%= product.name %>" class="h-48 w-auto object-contain transition-transform duration-500 group-hover:scale-110 mix-blend-multiply">
                         </a>
                         <div class="absolute bottom-0 left-4 right-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                            <button class="w-full bg-white text-gray-800 font-bold py-3 rounded shadow-md flex items-center justify-center gap-2 hover:bg-[#4CAF50] hover:text-white transition">
-                                <i class="ph ph-shopping-cart text-xl"></i>
-                            </button>
+                            <button 
+                          class="add-to-cart-btn w-full bg-[#4CAF50] text-white font-bold py-3 rounded-lg shadow-lg flex items-center justify-center gap-2 hover:bg-[#388E3C] active:scale-95 transition"
+                          data-id="<%= product.id %>"
+                          data-name="<%= product.name %>"
+                          data-price="<%= product.price %>"
+                          data-image="<%= product.image %>"
+                          data-unit="<%= product.unit %>" 
+                        >
+                                 <i class="ph ph-shopping-cart text-xl"></i>
+                        </button>
                         </div>
                     </div>
 

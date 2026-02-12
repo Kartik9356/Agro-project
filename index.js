@@ -11,8 +11,7 @@ const products = [
   {
     id: 1,
     name: "Watermelon – Small",
-    image:
-      "https://www.jiomart.com/images/product/original/590000090/watermelon-kiran-1-pc-approx-2300-g-3000-g-product-images-o590000090-p590000090-0-202408070949.jpg?im=Resize=(1000,1000)",
+    image: "/images/products/watermelon-small.jpg",
     price: 60.0,
     originalPrice: 0,
     unit: "1 pc (1.7 - 2.5 kg)",
@@ -24,9 +23,7 @@ const products = [
   {
     id: 2,
     name: "Nagpur's Famous Orange",
-    image:
-      "https://media.istockphoto.com/id/185284489/photo/orange.jpg?s=612x612&w=0&k=20&c=m4EXknC74i2aYWCbjxbzZ6EtRaJkdSJNtekh4m1PspE=",
-    price: 120.0,
+    image: "/images/products/orange.jpg",
     originalPrice: 150.0,
     unit: "1 kg",
     sku: "NAGORANGE",
@@ -37,8 +34,7 @@ const products = [
   {
     id: 3,
     name: "Premium Quality Apple",
-    image:
-      "https://media.istockphoto.com/id/184276818/photo/red-apple.jpg?s=612x612&w=0&k=20&c=MkZSlyZkdYsI602IL9lUvY15Zj8OecB92kGC70eL4q8=",
+    image: "/images/products/apple.jpg",
     price: 220.0,
     originalPrice: 260.0,
     unit: "1 kg",
@@ -50,8 +46,7 @@ const products = [
   {
     id: 4,
     name: "G9 Cavendish Banana",
-    image:
-      "https://t4.ftcdn.net/jpg/02/63/64/67/360_F_263646700_M5CF7ba2F6F7c7c3c3c3c3c3c3c3c3c3.jpg",
+    image: "/images/products/banana.jpg",
     price: 60.0,
     originalPrice: 80.0,
     unit: "1 dozen",
@@ -63,8 +58,7 @@ const products = [
   {
     id: 5,
     name: "Kiwi - Green",
-    image:
-      "https://media.istockphoto.com/id/834845016/photo/kiwi-fruit-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=2d30vN3t5zM9yW7r6t8o9q0p1s2u3v4w5x6y7z8",
+    image: "/images/products/kiwi-green.jpg",
     price: 120.0,
     originalPrice: 0,
     unit: "3 pcs",
@@ -76,8 +70,7 @@ const products = [
   {
     id: 6,
     name: "Papaya - Small",
-    image:
-      "https://media.istockphoto.com/id/1152601633/photo/papaya-fruit-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=1a2b3c4d5e6f7g8h9i0j",
+    image: "/images/products/papaya-small.jpg",
     price: 70.0,
     originalPrice: 0,
     unit: "1 pc",
@@ -97,33 +90,80 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use((req, res, next) => {
+  res.locals.company = {
+    name: "Blue Berry Impex",
+    email: "blueberryimpex2024@gmail.com", // Replace with real email
+    phone: "+91 9834431616", // Replace with real phone
+    address:
+      "Shop no 2 b38/5 mannat tower near vit college upper Indra nagar bibewadi pune 411037", // Replace with real address
+    mapLink: "https://maps.google.com/...", // Optional: Link to Google Maps
+    social: {
+      facebook: "#",
+      instagram: "#",
+      twitter: "#",
+    },
+  };
+  next();
+});
+
+app.use((req, res, next) => {
+    res.locals.activeSearch = '';
+    res.locals.activeCategory = '';
+    next();
+});
+
 // ROUTES
 app.get("/", (req, res) => {
-  res.render("home", {
-    title: "Janta Agro Traders - Home",
-    products: products,
-  });
+  res.render("home", { title: "Home - Blue Berry Impex", products: products });
 });
 
 app.get("/shop", (req, res) => {
+  // 1. Get Query Parameters
+  const categoryFilter = req.query.category;
+  const searchQuery = req.query.search;
+
+  let displayedProducts = products;
+
+  // 2. Filter by Category (if selected)
+  if (categoryFilter && categoryFilter !== "") {
+    displayedProducts = displayedProducts.filter(
+      (p) => p.category === categoryFilter,
+    );
+  }
+
+  // 3. Filter by Search Query (if typed)
+  if (searchQuery) {
+    const query = searchQuery.toLowerCase();
+    displayedProducts = displayedProducts.filter(
+      (p) =>
+        p.name.toLowerCase().includes(query) ||
+        p.description.toLowerCase().includes(query) ||
+        p.category.toLowerCase().includes(query),
+    );
+  }
+
+  // 4. Render the page
   res.render("shop", {
-    title: "Shop - Janta Agro Traders",
-    products: products,
+    title: "Shop - Blue Berry Impex",
+    products: displayedProducts,
+    activeCategory: categoryFilter || "",
+    activeSearch: searchQuery || "", // Send this back so the input stays filled
   });
 });
 
 app.get("/about", (req, res) => {
-  res.render("about", { title: "About Us - Janta Agro Traders" });
+  res.render("about", { title: "About Us - Blue Berry Impex" });
 });
 
 app.get("/delivery", (req, res) => {
   res.render("delivery", {
-    title: "Packaging & Delivery - Janta Agro Traders",
+    title: "Packaging & Delivery - Blue Berry Impex",
   });
 });
 
 app.get("/contact", (req, res) => {
-  res.render("contact", { title: "Contact Us - Janta Agro Traders" });
+  res.render("contact", { title: "Contact Us - Blue Berry Impex" });
 });
 
 // NEW: PRODUCT DETAILS ROUTE
@@ -134,7 +174,7 @@ app.get("/product/:id", (req, res) => {
   if (product) {
     // Pass the single product AND the full list (for "Related Products")
     res.render("productDetails", {
-      title: `${product.name} - Janta Agro`,
+      title: `${product.name} - Blue Berry Impex`,
       product: product,
       relatedProducts: products.filter((p) => p.id !== productId).slice(0, 4),
     });
@@ -157,63 +197,36 @@ app.get("/cart", (req, res) => {
   ];
 
   res.render("cart", {
-    title: "Cart - Janta Agro Traders",
+    title: "Cart - Blue Berry Impex",
     cartItems: cartItems,
   });
 });
 
 app.get("/checkout", (req, res) => {
-  // Reuse the mock cart data for the summary
-  const cartItems = [
-    {
-      name: "Watermelon - Small, 1 pc 1.7 - 2.5 kg",
-      price: 60.0,
-      quantity: 1,
-    },
-  ];
-
-  res.render("checkout", {
-    title: "Checkout - Janta Agro Traders",
-    cartItems: cartItems,
-  });
+  res.render("checkout", { title: "Checkout - Blue Berry Impex" });
 });
 
 app.get("/order-confirmation", (req, res) => {
-  // Mock Order Data to match your screenshot
-  const order = {
-    id: 901,
-    date: "February 11, 2026",
-    total: 60.0,
-    paymentMethod: "Cash on delivery",
-    shippingCost: 0,
-    items: [
-      {
-        name: "Watermelon - Small, 1 pc 1.7 - 2.5 kg",
-        price: 60.0,
-        quantity: 1,
-      },
-    ],
-    billing: {
-      name: "Kartik Biradar", // Using your profile name
-      address: "pakiza colony opp dargah",
-      city: "Amravati",
-      zip: "444601",
-      state: "Maharashtra",
-      phone: "7448124205",
-      email: "sales@jantaagrotraders.com",
-    },
-    shipping: {
-      name: "Kartik Biradar",
-      address: "pakiza colony opp dargah",
-      city: "Amravati",
-      zip: "444601",
-      state: "Maharashtra",
-    },
-  };
-
   res.render("orderConfirmation", {
-    title: "Order Received - Janta Agro Traders",
-    order: order,
+    title: "Order Received - Blue Berry Impex",
+  });
+});
+
+app.get("/privacy-policy", (req, res) => {
+  res.render("privacy-policy", {
+    title: "Privacy Policy - Blue Berry Impex",
+  });
+});
+
+app.get("/terms-conditions", (req, res) => {
+  res.render("terms-conditions", {
+    title: "Terms & Conditions - Blue Berry Impex",
+  });
+});
+
+app.get("/delivery-shipping-policy", (req, res) => {
+  res.render("delivery-shipping-policy", {
+    title: "Delivery & Shipping Policy - Blue Berry Impex",
   });
 });
 

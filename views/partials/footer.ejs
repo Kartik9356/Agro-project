@@ -6,25 +6,20 @@
           About Us
         </h4>
         <p class="text-sm leading-relaxed text-red-100 mb-4">
-          Janta Agro Traders, your trusted partner in the wholesale fruit
-          trading industry. With years of experience and dedication, we
-          specialize in sourcing and supplying high-quality fresh fruits.
+          <%= company.name %> is your trusted partner in the wholesale fruit
+          trading industry. We specialize in sourcing and supplying high-quality
+          fresh fruits to the global market.
         </p>
         <div class="flex gap-4">
           <a
-            href="#"
+            href="<%= company.social.facebook %>"
             class="w-8 h-8 rounded-full bg-white text-[#B71C1C] flex items-center justify-center hover:bg-yellow-400 transition"
             ><i class="ph-fill ph-facebook-logo"></i
           ></a>
           <a
-            href="#"
+            href="<%= company.social.instagram %>"
             class="w-8 h-8 rounded-full bg-white text-[#B71C1C] flex items-center justify-center hover:bg-yellow-400 transition"
             ><i class="ph-fill ph-instagram-logo"></i
-          ></a>
-          <a
-            href="#"
-            class="w-8 h-8 rounded-full bg-white text-[#B71C1C] flex items-center justify-center hover:bg-yellow-400 transition"
-            ><i class="ph-fill ph-youtube-logo"></i
           ></a>
         </div>
       </div>
@@ -60,22 +55,24 @@
           Customer Area
         </h4>
         <ul class="space-y-3 text-sm text-red-100">
-          <li>
+          <!-- <li>
             <a href="#" class="hover:text-yellow-300 transition">My Account</a>
-          </li>
+          </li> -->
           <li>
-            <a href="#" class="hover:text-yellow-300 transition"
+            <a href="/privacy-policy" class="hover:text-yellow-300 transition"
               >Privacy Policy</a
             >
           </li>
           <li>
-            <a href="#" class="hover:text-yellow-300 transition"
+            <a href="/terms-conditions" class="hover:text-yellow-300 transition"
               >Terms & Conditions</a
             >
           </li>
           <li>
-            <a href="#" class="hover:text-yellow-300 transition"
-              >Delivery & Returns</a
+            <a
+              href="/delivery-shipping-policy"
+              class="hover:text-yellow-300 transition"
+              >Delivery & Shipping Policy</a
             >
           </li>
         </ul>
@@ -88,26 +85,29 @@
         <ul class="space-y-4 text-sm text-red-100">
           <li class="flex items-start gap-3">
             <i class="ph-fill ph-map-pin text-xl mt-1"></i>
-            <span
-              >Shop no 19 pakiza colony opp dargah walgaon road amravati 444601,
-              India</span
-            >
+            <span><%= company.address %></span>
           </li>
           <li class="flex items-center gap-3">
             <i class="ph-fill ph-phone text-xl"></i>
-            <span>+91 7448124205</span>
+            <span><%= company.phone %></span>
           </li>
           <li class="flex items-center gap-3">
             <i class="ph-fill ph-envelope text-xl"></i>
-            <span>sales@jantaagrotraders.com</span>
+            <span><%= company.email %></span>
           </li>
         </ul>
+      </div>
+
+      <div class="border-t border-red-800 pt-8 text-center">
+        <p class="text-sm text-red-200">
+          Copyright © 2026 <%= company.name %>. All rights reserved.
+        </p>
       </div>
     </div>
 
     <div class="border-t border-red-800 pt-8 text-center">
       <p class="text-sm text-red-200">
-        Copyright © 2026 Hello Shoppable. Powered by WordPress
+        Copyright © 2026 Hello Shoppable. Powered by Devloper Kartik. All rights reserved.
       </p>
     </div>
   </div>

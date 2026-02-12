@@ -49,8 +49,7 @@
                   <div>
                     <h5 class="font-bold text-lg">Visit Us</h5>
                     <p class="text-green-100 text-sm leading-relaxed">
-                      Shop no 19 pakiza colony opp dargah walgaon road amravati
-                      444601, India
+                      <%= company.address %>
                     </p>
                   </div>
                 </div>
@@ -63,7 +62,7 @@
                   </div>
                   <div>
                     <h5 class="font-bold text-lg">Call Us</h5>
-                    <p class="text-green-100 text-sm">+91 7448124205</p>
+                    <p class="text-green-100 text-sm"><%= company.phone %></p>
                   </div>
                 </div>
 
@@ -75,9 +74,7 @@
                   </div>
                   <div>
                     <h5 class="font-bold text-lg">Email Us</h5>
-                    <p class="text-green-100 text-sm">
-                      info@jantaagrotraders.com
-                    </p>
+                    <p class="text-green-100 text-sm"><%= company.email %></p>
                   </div>
                 </div>
               </div>

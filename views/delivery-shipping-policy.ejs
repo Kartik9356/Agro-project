@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+  </head>
+  <body class="bg-gray-50 font-sans text-gray-800 flex flex-col min-h-screen">
+    
+    <%- include('partials/header') %>
+
+    <div class="bg-white border-b border-gray-200 py-10 mb-8">
+      <div class="container mx-auto px-4">
+        <h1 class="text-4xl font-extrabold text-gray-900 mb-2">Delivery & Shipping Policy</h1>
+        <p class="text-gray-500 text-sm">Last updated: February 12, 2026</p>
+      </div>
+    </div>
+
+    <section class="mb-auto">
+      <div class="container mx-auto px-4 max-w-4xl">
+        
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 md:p-12 space-y-10">
+            
+            <p class="text-gray-600 italic">
+                At <%= company.name %> Traders, we are committed to delivering your order accurately, in good condition, and always on time.
+            </p>
+
+            <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+                    <i class="ph-fill ph-map-pin text-[#4CAF50]"></i> 1. Shipping Availability
+                </h3>
+                <p class="text-gray-600 leading-relaxed ml-7">
+                    We currently ship products <strong>only within India</strong>. Orders are processed and dispatched based on serviceability provided by our courier partners.
+                </p>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+                    <i class="ph-fill ph-clock text-[#4CAF50]"></i> 2. Delivery Timeline
+                </h3>
+                <div class="ml-7">
+                    <p class="text-gray-600 leading-relaxed mb-2">
+                        Standard delivery time within India is <strong>7–14 working days</strong>.
+                    </p>
+                    <p class="text-gray-600 leading-relaxed">
+                        In most cases, delivery is faster depending on the destination and courier network. If your order does not arrive within the expected time frame, please contact us at <a href="mailto:blueberryimpex2024@gmail.com" class="text-[#0073aa] hover:underline">blueberryimpex2024@gmail.com</a>.
+                    </p>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">3. Service Transit Time Disclaimer</h3>
+                <p class="text-gray-600 leading-relaxed ml-7">
+                    Transit times are controlled by external courier companies. Delivery delays may occur due to factors beyond our control, including weather conditions, strikes, and other Force Majeure events. We are not responsible for such delays.
+                </p>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">4. Tentative Delivery Estimates</h3>
+                <p class="text-gray-600 leading-relaxed ml-7">
+                    All delivery timelines provided are tentative estimates shared by the courier partners. Timelines may change based on origin, destination, and courier load, especially during peak seasons or holidays.
+                </p>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">5. Shipping Charges</h3>
+                <div class="ml-7">
+                    <p class="text-gray-600 mb-2">Shipping charges are calculated based on:</p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 bg-gray-50 p-4 rounded-lg inline-block w-full">
+                        <li>Weight of the product</li>
+                        <li>Volumetric dimensions (if applicable)</li>
+                        <li>Shipping method selected</li>
+                        <li>Destination address</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">6. Shipping Support</h3>
+                <p class="text-gray-600 leading-relaxed ml-7">
+                    For any shipping-related queries, please contact us at <span class="font-bold text-gray-800">blueberryimpex2024@gmail.com</span> or call our support line.
+                </p>
+            </div>
+
+            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+                <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                    <i class="ph-fill ph-truck text-[#FBC02D]"></i>
+                    Special Handling: Heavy & Bulk Items
+                </h3>
+
+                <div class="space-y-6">
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-2 uppercase text-xs tracking-wider">7. Heavy Product Deliveries</h4>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-2">
+                            All heavy or bulky products are shipped through <strong>Road Transport Services</strong>. Customers must coordinate with the nearest transport office (as informed at the time of purchase) and collect the parcel.
+                        </p>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Products marked as “Free Shipping” will not incur extra charges. However, if no free shipping claim is made on the product page, transportation charges must be paid by the customer.
+                        </p>
+                    </div>
+
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-2 uppercase text-xs tracking-wider">8. Products Above 20 kg</h4>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Items weighing more than <strong>20 kg</strong> must be paid for in advance. Such products are shipped only through transport services and must be collected by the customer from the designated transport location.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <div class="h-20"></div>
+
+    <%- include('partials/footer') %>
+
+  </body>
+</html>
