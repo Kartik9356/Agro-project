@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const app = express();
+require("dotenv").config();
 
 // for email
 const nodemailer = require("nodemailer");
@@ -89,8 +90,8 @@ const products = [
 ];
 
 // EMAIL CONFIGURATION (Using Nodemailer with Gmail SMTP)
-const OWNER_EMAIL = "kartikbiradar54@gmail.com"; // Owner's real email
-const OWNER_PASSWORD = "zvtj uasb aorq qkkf"; // Owner's App Password
+const OWNER_EMAIL = process.env.OWNER_EMAIL; // Owner's real email
+const OWNER_PASSWORD = process.env.OWNER_PASSWORD; // Owner's App Password
 // ----------------------------------------------
 
 // EMAIL TRANSPORTER (Uses the variables above)
@@ -177,7 +178,7 @@ app.get("/about", (req, res) => {
   res.render("about", { title: "About Us - Blue Berry Impex" });
 });
 
-app.get("/delivery", (req, res) => {
+app.get("/packaging-delivery", (req, res) => {
   res.render("delivery", {
     title: "Packaging & Delivery - Blue Berry Impex",
   });
@@ -445,7 +446,7 @@ app.post("/contact-submit", (req, res) => {
     });
 });
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
