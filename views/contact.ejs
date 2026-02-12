@@ -104,48 +104,155 @@
               Send us a Message
             </h2>
 
-            <form action="#" method="POST" class="space-y-6">
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="space-y-2">
-                  <label class="text-sm font-bold text-gray-600"
-                    >Your Name</label
-                  >
-                  <input
-                    type="text"
-                    placeholder="John Doe"
-                    class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#4CAF50] focus:ring-2 focus:ring-green-100 outline-none transition bg-gray-50"
-                  />
-                </div>
+            <div
+              class="bg-white p-8 md:p-10 rounded-2xl shadow-lg border border-gray-100"
+            >
+              <h3 class="text-2xl font-bold text-gray-900 mb-6">
+                Send us a Message
+              </h3>
 
-                <div class="space-y-2">
-                  <label class="text-sm font-bold text-gray-600"
-                    >Phone Number</label
-                  >
-                  <input
-                    type="tel"
-                    placeholder="+91 98765 43210"
-                    class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#4CAF50] focus:ring-2 focus:ring-green-100 outline-none transition bg-gray-50"
-                  />
-                </div>
-              </div>
-
-              <div class="space-y-2">
-                <label class="text-sm font-bold text-gray-600">Message</label>
-                <textarea
-                  rows="4"
-                  placeholder="I am interested in buying..."
-                  class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#4CAF50] focus:ring-2 focus:ring-green-100 outline-none transition bg-gray-50"
-                ></textarea>
-              </div>
-
-              <button
-                type="submit"
-                class="w-full bg-[#4CAF50] hover:bg-[#388E3C] text-white font-bold py-4 rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transition duration-300 flex items-center justify-center gap-2"
+              <div
+                id="success-msg"
+                class="hidden bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded mb-6 flex items-center gap-2"
               >
-                <i class="ph-bold ph-paper-plane-right"></i>
-                Send Message
-              </button>
-            </form>
+                <i class="ph-fill ph-check-circle text-xl"></i>
+                <span>Thank you! Your message has been sent.</span>
+              </div>
+
+              <div
+                id="error-msg"
+                class="hidden bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-6 flex items-center gap-2"
+              >
+                <i class="ph-fill ph-warning-circle text-xl"></i>
+                <span>Something went wrong. Please try again.</span>
+              </div>
+
+              <form id="contact-form" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div class="space-y-2">
+                    <label class="text-sm font-bold text-gray-700"
+                      >Your Name <span class="text-red-500">*</span></label
+                    >
+                    <input
+                      type="text"
+                      name="name"
+                      required
+                      class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:border-[#4CAF50] focus:ring-1 focus:ring-[#4CAF50] transition"
+                      placeholder="John Doe"
+                    />
+                  </div>
+                  <div class="space-y-2">
+                    <label class="text-sm font-bold text-gray-700"
+                      >Phone Number <span class="text-red-500">*</span></label
+                    >
+                    <input
+                      type="tel"
+                      name="phone"
+                      required
+                      class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:border-[#4CAF50] focus:ring-1 focus:ring-[#4CAF50] transition"
+                      placeholder="+91 98765 43210"
+                    />
+                  </div>
+                </div>
+                <!--  -->
+                <div class="space-y-2">
+                  <label class="text-sm font-bold text-gray-700"
+                    >Your Email <span class="text-red-500">*</span></label
+                  >
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:border-[#4CAF50] focus:ring-1 focus:ring-[#4CAF50] transition"
+                    placeholder="john@example.com"
+                  />
+                </div>
+
+                <div class="space-y-2">
+                  <label class="text-sm font-bold text-gray-700"
+                    >Message <span class="text-red-500">*</span></label
+                  >
+                  <textarea
+                    name="message"
+                    required
+                    rows="5"
+                    class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:border-[#4CAF50] focus:ring-1 focus:ring-[#4CAF50] transition"
+                    placeholder="How can we help you?"
+                  ></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  id="submit-btn"
+                  class="w-full bg-[#D32F2F] hover:bg-[#B71C1C] text-white font-bold py-4 rounded-lg shadow-md uppercase tracking-wide transition transform active:scale-95 flex items-center justify-center gap-2"
+                >
+                  <span>Send Message</span>
+                  <i class="ph-bold ph-paper-plane-right"></i>
+                </button>
+              </form>
+            </div>
+
+            <script>
+              document
+                .getElementById("contact-form")
+                .addEventListener("submit", function (e) {
+                  e.preventDefault(); // Stop page reload
+
+                  const btn = document.getElementById("submit-btn");
+                  const successMsg = document.getElementById("success-msg");
+                  const errorMsg = document.getElementById("error-msg");
+
+                  // 1. Change Button State
+                  const originalText = btn.innerHTML;
+                  btn.innerHTML =
+                    '<i class="ph ph-spinner animate-spin text-xl"></i> Sending...';
+                  btn.disabled = true;
+                  btn.classList.add("opacity-75");
+
+                  // 2. Gather Data
+                  const formData = {
+                    name: this.name.value,
+                    email: this.email.value,
+                    phone: this.phone.value,
+                    message: this.message.value,
+                  };
+
+                  // 3. Send to Server
+                  fetch("/contact-submit", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(formData),
+                  })
+                    .then((response) => response.json())
+                    .then((data) => {
+                      if (data.success) {
+                        // Show Success
+                        successMsg.classList.remove("hidden");
+                        errorMsg.classList.add("hidden");
+                        this.reset(); // Clear form
+                      } else {
+                        throw new Error("Server error");
+                      }
+                    })
+                    .catch((err) => {
+                      // Show Error
+                      console.error(err);
+                      errorMsg.classList.remove("hidden");
+                      successMsg.classList.add("hidden");
+                    })
+                    .finally(() => {
+                      // Reset Button
+                      btn.innerHTML = originalText;
+                      btn.disabled = false;
+                      btn.classList.remove("opacity-75");
+
+                      // Hide success message after 5 seconds
+                      setTimeout(() => {
+                        successMsg.classList.add("hidden");
+                      }, 5000);
+                    });
+                });
+            </script>
           </div>
         </div>
       </div>

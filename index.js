@@ -2,9 +2,15 @@ const express = require("express");
 const path = require("path");
 const app = express();
 
+// for email
+const nodemailer = require("nodemailer");
+const bodyParser = require("body-parser");
+
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // GLOBAL DATA (Enhanced with Description & Category)
 const products = [
@@ -24,6 +30,7 @@ const products = [
     id: 2,
     name: "Nagpur's Famous Orange",
     image: "/images/products/orange.jpg",
+    price: 120.0,
     originalPrice: 150.0,
     unit: "1 kg",
     sku: "NAGORANGE",
@@ -60,7 +67,7 @@ const products = [
     name: "Kiwi - Green",
     image: "/images/products/kiwi-green.jpg",
     price: 120.0,
-    originalPrice: 0,
+    originalPrice: 150.0,
     unit: "3 pcs",
     sku: "KIWIGREEN",
     category: "Exotic Fruits",
@@ -72,7 +79,7 @@ const products = [
     name: "Papaya - Small",
     image: "/images/products/papaya-small.jpg",
     price: 70.0,
-    originalPrice: 0,
+    originalPrice: 90.0,
     unit: "1 pc",
     sku: "PAPAYASMALL",
     category: "Organic Fruits",
@@ -80,6 +87,20 @@ const products = [
       "Rich in antioxidants and great for digestion. Our papayas are naturally ripened without carbide.",
   },
 ];
+
+// EMAIL CONFIGURATION (Using Nodemailer with Gmail SMTP)
+const OWNER_EMAIL = "kartikbiradar54@gmail.com"; // Owner's real email
+const OWNER_PASSWORD = "zvtj uasb aorq qkkf"; // Owner's App Password
+// ----------------------------------------------
+
+// EMAIL TRANSPORTER (Uses the variables above)
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: OWNER_EMAIL,
+    pass: OWNER_PASSWORD,
+  },
+});
 
 // MIDDLEWARE to print hit count for each route after every request
 const hitCounts = {};
@@ -108,9 +129,9 @@ app.use((req, res, next) => {
 });
 
 app.use((req, res, next) => {
-    res.locals.activeSearch = '';
-    res.locals.activeCategory = '';
-    next();
+  res.locals.activeSearch = "";
+  res.locals.activeCategory = "";
+  next();
 });
 
 // ROUTES
@@ -228,6 +249,200 @@ app.get("/delivery-shipping-policy", (req, res) => {
   res.render("delivery-shipping-policy", {
     title: "Delivery & Shipping Policy - Blue Berry Impex",
   });
+});
+
+// POST ROUTE: Handle Order Placement & Send Emails
+app.post("/place-order", (req, res) => {
+  const order = req.body;
+
+  // --- HELPER: Generate Item List HTML ---
+  const itemsHtml = order.items
+    .map(
+      (item) => `
+        <tr>
+            <td style="padding: 8px; border-bottom: 1px solid #ddd;">${item.name} ${item.unit ? `(${item.unit})` : ""}</td>
+            <td style="padding: 8px; border-bottom: 1px solid #ddd; text-align: center;">${item.quantity}</td>
+            <td style="padding: 8px; border-bottom: 1px solid #ddd; text-align: right;">₹${item.price}</td>
+            <td style="padding: 8px; border-bottom: 1px solid #ddd; text-align: right;"><strong>₹${item.price * item.quantity}</strong></td>
+        </tr>
+    `,
+    )
+    .join("");
+
+  // --- 1. EMAIL TO CUSTOMER (The Official Receipt) ---
+  const customerMailOptions = {
+    from: `"Blue Berry Impex" <${OWNER_EMAIL}>`,
+    to: order.billing.email,
+    subject: `Order Confirmation - Order #${order.id}`,
+    html: `
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #333;">
+                <h2 style="color: #4CAF50; border-bottom: 2px solid #4CAF50; padding-bottom: 10px;">Thank You for Your Order!</h2>
+                <p>Hi <strong>${order.billing.name}</strong>,</p>
+                <p>We have successfully received your order. We will contact you shortly to confirm the delivery timing.</p>
+                
+                <table style="width: 100%; margin-top: 20px; border-collapse: collapse;">
+                    <tr>
+                        <td style="padding: 5px;"><strong>Order ID:</strong> #${order.id}</td>
+                        <td style="padding: 5px; text-align: right;"><strong>Date:</strong> ${order.date}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 5px;"><strong>Payment:</strong> ${order.paymentMethod}</td>
+                        <td style="padding: 5px; text-align: right;"><strong>Status:</strong> Processing</td>
+                    </tr>
+                </table>
+
+                <h3 style="background-color: #f4f4f4; padding: 10px; margin-top: 20px;">Order Summary</h3>
+                <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                    <thead>
+                        <tr style="background-color: #eee;">
+                            <th style="padding: 8px; text-align: left;">Product</th>
+                            <th style="padding: 8px; text-align: center;">Qty</th>
+                            <th style="padding: 8px; text-align: right;">Price</th>
+                            <th style="padding: 8px; text-align: right;">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${itemsHtml}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" style="padding: 10px; text-align: right;"><strong>Subtotal:</strong></td>
+                            <td style="padding: 10px; text-align: right;">₹${order.total}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="padding: 5px; text-align: right;"><strong>Shipping:</strong></td>
+                            <td style="padding: 5px; text-align: right;">Free</td>
+                        </tr>
+                        <tr style="font-size: 18px; color: #D32F2F;">
+                            <td colspan="3" style="padding: 10px; text-align: right;"><strong>Grand Total:</strong></td>
+                            <td style="padding: 10px; text-align: right;"><strong>₹${order.total}</strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <h3 style="background-color: #f4f4f4; padding: 10px; margin-top: 20px;">Billing Address</h3>
+                <p style="line-height: 1.6;">
+                    ${order.billing.address}<br>
+                    ${order.billing.city}, ${order.billing.state} - ${order.billing.zip}<br>
+                    <strong>Phone:</strong> ${order.billing.phone}
+                </p>
+
+                <hr style="margin: 30px 0; border: 0; border-top: 1px solid #eee;">
+                <p style="text-align: center; font-size: 12px; color: #999;">
+                    Blue Berry Impex | +91 98765 43210 | contact@bluebimpex.com
+                </p>
+            </div>
+        `,
+  };
+
+  // --- 2. EMAIL TO OWNER (The Full Report) ---
+  const adminMailOptions = {
+    from: `"Website Order System" <${OWNER_EMAIL}>`,
+    to: OWNER_EMAIL,
+    subject: `🔔 NEW ORDER: #${order.id} - ₹${order.total} (from ${order.billing.name})`,
+    html: `
+            <div style="font-family: Arial, sans-serif; color: #333;">
+                <h2 style="color: #D32F2F;">🔔 New Order Received!</h2>
+                
+                <div style="background-color: #ffebee; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+                    <p style="margin: 5px 0;"><strong>Customer:</strong> ${order.billing.name}</p>
+                    <p style="margin: 5px 0;"><strong>Phone:</strong> <a href="tel:${order.billing.phone}">${order.billing.phone}</a></p>
+                    <p style="margin: 5px 0;"><strong>Email:</strong> <a href="mailto:${order.billing.email}">${order.billing.email}</a></p>
+                    <p style="margin: 5px 0;"><strong>Total Value:</strong> ₹${order.total}</p>
+                </div>
+
+                <h3>📦 Items to Pack:</h3>
+                <table style="width: 100%; border-collapse: collapse; border: 1px solid #ddd;">
+                    <thead>
+                        <tr style="background-color: #f9f9f9;">
+                            <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Product Name</th>
+                            <th style="padding: 10px; border: 1px solid #ddd; text-align: center;">Qty</th>
+                            <th style="padding: 10px; border: 1px solid #ddd; text-align: right;">Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${order.items
+                          .map(
+                            (item) => `
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid #ddd;">${item.name} <span style="color:#666; font-size:12px;">(${item.unit})</span></td>
+                                <td style="padding: 10px; border: 1px solid #ddd; text-align: center; font-weight:bold;">${item.quantity}</td>
+                                <td style="padding: 10px; border: 1px solid #ddd; text-align: right;">₹${item.price * item.quantity}</td>
+                            </tr>
+                        `,
+                          )
+                          .join("")}
+                    </tbody>
+                </table>
+
+                <h3>📍 Delivery Address:</h3>
+                <p style="border: 1px dashed #ccc; padding: 10px; background: #fff;">
+                    ${order.billing.name}<br>
+                    ${order.billing.address}<br>
+                    ${order.billing.city}, ${order.billing.state}<br>
+                    PIN: <strong>${order.billing.zip}</strong>
+                </p>
+
+                <p style="margin-top: 20px; font-size: 12px; color: #666;">
+                    Order Date: ${order.date}<br>
+                    Payment Method: ${order.paymentMethod}
+                </p>
+            </div>
+        `,
+  };
+
+  // --- SEND BOTH EMAILS ---
+  Promise.all([
+    transporter.sendMail(customerMailOptions),
+    transporter.sendMail(adminMailOptions),
+  ])
+    .then(() => {
+      console.log(`✅ Order #${order.id} emails sent successfully.`);
+      res.json({ success: true, message: "Order placed and emails sent!" });
+    })
+    .catch((err) => {
+      console.error("❌ EMAIL ERROR:", err);
+      // We still show success to the user so they see the Thank You page
+      res.json({ success: true, warning: "Order placed but email failed." });
+    });
+});
+
+// POST ROUTE: Handle Contact Form Submission
+app.post("/contact-submit", (req, res) => {
+  const { name, email, phone, message } = req.body;
+
+  // 1. Email Content for the OWNER
+  const adminMailOptions = {
+    from: `"Website Inquiry" <${OWNER_EMAIL}>`,
+    to: OWNER_EMAIL,
+    replyTo: email, // If owner replies, it goes to the customer
+    subject: `📩 New Contact Inquiry from ${name}`,
+    html: `
+            <div style="font-family: Arial, sans-serif; color: #333;">
+                <h2 style="color: #4CAF50;">New Message from Website</h2>
+                <div style="background-color: #f9f9f9; padding: 15px; border-left: 4px solid #4CAF50;">
+                    <p><strong>Name:</strong> ${name}</p>
+                    <p><strong>Email:</strong> ${email}</p>
+                    <p><strong>Phone:</strong> ${phone}</p>
+                    <p><strong>Message:</strong></p>
+                    <p style="background-color: #fff; padding: 10px; border: 1px solid #ddd;">${message}</p>
+                </div>
+            </div>
+        `,
+  };
+
+  // 2. Send the Email
+  transporter
+    .sendMail(adminMailOptions)
+    .then(() => {
+      res.json({ success: true, message: "Message sent successfully!" });
+    })
+    .catch((err) => {
+      console.error("CONTACT FORM ERROR:", err);
+      res
+        .status(500)
+        .json({ success: false, message: "Failed to send message." });
+    });
 });
 
 const PORT = 3000;

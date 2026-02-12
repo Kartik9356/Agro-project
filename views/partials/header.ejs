@@ -25,7 +25,7 @@
   }
 </style>
 
-<header class="w-full bg-white shadow-sm font-sans">
+<header class="w-full bg-white shadow-sm font-sans relative z-50">
   <div
     class="container mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4"
   >
@@ -33,38 +33,36 @@
       <img
         src="/images/logo.svg"
         alt="<%= company.name %> Logo"
-        class="h-16 w-auto object-contain"
+        class="h-12 md:h-16 w-auto object-contain"
       />
-      <span class="text-xl font-bold text-[#4CAF50]"
-        ><span class="text-black">Blue Berry</span> Impes</span
-      >
+      <span class="text-xl font-bold text-[#4CAF50]">
+        <span class="text-black">Blue Berry</span> Impex
+      </span>
     </a>
 
     <div class="flex-1 max-w-xl w-full relative">
-      <div class="flex-1 max-w-xl w-full relative">
-        <form
-          action="/shop"
-          method="GET"
-          class="flex items-center border border-gray-300 rounded-full overflow-hidden bg-gray-50 focus-within:ring-2 focus-within:ring-[#4CAF50]"
+      <form
+        action="/shop"
+        method="GET"
+        class="flex items-center border border-gray-300 rounded-full overflow-hidden bg-gray-50 focus-within:ring-2 focus-within:ring-[#4CAF50]"
+      >
+        <input
+          type="text"
+          name="search"
+          placeholder="Search for products..."
+          class="w-full py-3 px-5 outline-none bg-transparent text-gray-700"
+          value="<%= typeof activeSearch !== 'undefined' ? activeSearch : '' %>"
+        />
+
+        <div class="border-l border-gray-300 h-6"></div>
+
+        <button
+          type="submit"
+          class="bg-gray-100 hover:bg-gray-200 text-gray-600 px-5 py-3 transition"
         >
-          <input
-            type="text"
-            name="search"
-            placeholder="Search for products..."
-            class="w-full py-3 px-5 outline-none bg-transparent text-gray-700"
-            value="<%= activeSearch %>"
-          />
-
-          <div class="border-l border-gray-300 h-6"></div>
-
-          <button
-            type="submit"
-            class="bg-gray-100 hover:bg-gray-200 text-gray-600 px-5 py-3 transition"
-          >
-            <i class="ph ph-magnifying-glass text-xl"></i>
-          </button>
-        </form>
-      </div>
+          <i class="ph ph-magnifying-glass text-xl"></i>
+        </button>
+      </form>
     </div>
 
     <div class="flex items-center gap-6">
@@ -106,7 +104,7 @@
     </div>
   </div>
 
-  <nav class="bg-[#D32F2F] text-white">
+  <nav class="bg-[#D32F2F] text-white relative">
     <div class="container mx-auto px-4">
       <div class="flex items-center justify-between">
         <div
@@ -128,7 +126,6 @@
                 class="ph ph-caret-right text-gray-300 group-hover/item:text-[#4CAF50]"
               ></i>
             </a>
-
             <a
               href="/shop?category=Imported Fruits"
               class="block px-6 py-3 hover:bg-gray-50 border-b border-gray-100 transition flex justify-between items-center group/item"
@@ -138,7 +135,6 @@
                 class="ph ph-caret-right text-gray-300 group-hover/item:text-[#4CAF50]"
               ></i>
             </a>
-
             <a
               href="/shop?category=Exotic Fruits"
               class="block px-6 py-3 hover:bg-gray-50 border-b border-gray-100 transition flex justify-between items-center group/item"
@@ -148,7 +144,6 @@
                 class="ph ph-caret-right text-gray-300 group-hover/item:text-[#4CAF50]"
               ></i>
             </a>
-
             <a
               href="/shop"
               class="block px-6 py-3 hover:bg-gray-50 transition font-bold text-[#D32F2F] flex justify-between items-center"
@@ -176,30 +171,87 @@
         >
           Delivery & Packaging
         </a>
+
+        <button
+          id="mobile-menu-btn"
+          class="md:hidden p-2 text-white hover:text-yellow-300 focus:outline-none"
+        >
+          <i class="ph ph-list text-3xl"></i>
+        </button>
+      </div>
+    </div>
+
+    <div
+      id="mobile-menu"
+      class="hidden md:hidden absolute top-full left-0 w-full bg-[#a51919] border-t border-[#B71C1C] shadow-lg z-40"
+    >
+      <div
+        class="flex flex-col p-4 space-y-2 font-bold uppercase text-sm tracking-wide"
+      >
+        <a
+          href="/"
+          class="block py-3 border-b border-white/10 hover:text-yellow-300"
+          >Home</a
+        >
+        <a
+          href="/shop"
+          class="block py-3 border-b border-white/10 hover:text-yellow-300"
+          >Shop</a
+        >
+        <a
+          href="/about"
+          class="block py-3 border-b border-white/10 hover:text-yellow-300"
+          >About Us</a
+        >
+        <a
+          href="/contact"
+          class="block py-3 border-b border-white/10 hover:text-yellow-300"
+          >Contact Us</a
+        >
+        <a href="/packaging-delivery" class="block py-3 hover:text-yellow-300"
+          >Delivery & Packaging</a
+        >
       </div>
     </div>
   </nav>
+
   <script>
-    // 1. Run this immediately when any page loads
     document.addEventListener("DOMContentLoaded", () => {
+      // 1. Initialize Cart Header
       updateCartHeader();
+
+      // 2. Mobile Menu Toggle Logic
+      const menuBtn = document.getElementById("mobile-menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener("click", () => {
+          mobileMenu.classList.toggle("hidden");
+
+          // Toggle Icon between List and X
+          const icon = menuBtn.querySelector("i");
+          if (mobileMenu.classList.contains("hidden")) {
+            icon.classList.remove("ph-x");
+            icon.classList.add("ph-list");
+          } else {
+            icon.classList.remove("ph-list");
+            icon.classList.add("ph-x");
+          }
+        });
+      }
     });
 
-    // 2. Global "Add to Cart" Listener (Works on Home, Shop, Recommended, etc.)
+    // 3. Global "Add to Cart" Listener
     document.body.addEventListener("click", (e) => {
-      // Check if the clicked element (or its parent) is an .add-to-cart-btn
       const button = e.target.closest(".add-to-cart-btn");
 
       if (button) {
-        // Get product data from the HTML attributes
-        // Inside document.body.addEventListener...
-
         const product = {
           id: button.dataset.id,
           name: button.dataset.name,
           price: parseFloat(button.dataset.price),
           image: button.dataset.image,
-          unit: button.dataset.unit, // <--- ADD THIS LINE
+          unit: button.dataset.unit,
           quantity: 1,
         };
 
@@ -219,11 +271,9 @@
       }
     });
 
-    // 3. Core Cart Logic
+    // 4. Core Cart Logic
     function addToCart(product) {
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-      // Check if item already exists
       const existingItemIndex = cart.findIndex(
         (item) => item.id === product.id,
       );
@@ -238,10 +288,9 @@
       updateCartHeader();
     }
 
-    // 4. Update Header Function
+    // 5. Update Header Function
     function updateCartHeader() {
       const cart = JSON.parse(localStorage.getItem("cart")) || [];
-
       const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
       const totalPrice = cart.reduce(
         (sum, item) => sum + item.price * item.quantity,
